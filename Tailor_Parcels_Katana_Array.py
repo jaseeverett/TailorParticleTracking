@@ -14,7 +14,7 @@ from operator import attrgetter
 data_dir = ' /srv/scratch/z3097808/20year_run/20year_freerun_output_NEWnci/'
 
 npart = 100  # number of particles to be released
-repeatdt = delta(weeks=1)  # release from the same set of locations every X day
+repeatdt = delta(days=1)  # release from the same set of locations every X day
 
 # Forward: 9
 lon_array = [153.8072, 153.5873, 153.5460, 153.6929, 153.7817, 153.7955, 153.7790, 153.7062, 153.5131]
