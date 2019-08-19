@@ -1,0 +1,16 @@
+Type,Season,Latitude,Longitude, Name
+Forward,Spring & Summer,-28.5,153.7955, NaN
+Forward,Spring & Summer,-29,153.779, NaN
+Forward,Spring & Summer,-29.5,153.7062, NaN
+Forward,Spring & Summer,-30,153.5131, NaN
+Forward,Spring Only,-26,153.8072, NaN
+Forward,Spring Only,-26.5,153.5873, NaN
+Forward,Spring Only,-27,153.546, NaN
+Forward,Spring Only,-27.5,153.6929, NaN
+Backwards,Spring & Summer,-38,148.9147949, Gippsland Lakes
+Backwards,Spring & Summer,-37,150.1600037, Twofold Bay
+Backwards,Spring & Summer,-36.20000076,150.2451019, Wagonga Inlet
+Backwards,Spring & Summer,-35.09999847,150.8549957, Jervis Bay
+Backwards,Spring & Summer,-33.79999924,151.4167023, Sydney Harbour
+Backwards,Spring & Summer,-32,152.8444061, Wallis Lake
+Backwards,Spring & Summer,-31.39999962,153.0957947, Hastings River
