@@ -1,8 +1,0 @@
-#! /bin/bash
- 
-echo "epilogue: copy from local scratch to working directory"
-echo "    ${TMPDIR}"
-echo "    ${PBS_O_WORKDIR}"
-echo
- 
-rsync -a ${TMPDIR}/ /srv/scratch/z9902002/out
