@@ -1,7 +1,7 @@
 clear
 close all
 
-reprocess = 0;
+reprocess = 1;
 
 release = readtable('Release_Sites_all.csv');
 
@@ -11,9 +11,9 @@ release_for = release(strcmp(release.Type,'Forward')==1,:);
 model_bound = readtable('ROMS_Boundaries.csv');
 
 txt = 12;
-txt_font = 6;
+txt_font = 8;
 
-x1 = 145; x2 = 163;
+x1 = 144.5; x2 = 163;
 y1 = -45; y2 = -24;
 
 %%
@@ -37,9 +37,7 @@ textm(release_back.Latitude,release_back.Longitude + 1, release_back.Name,'fonts
 textm(mean(release_for.Latitude(1:4)),mean(release_for.Longitude(1:4)) + 1, {'Southern Spawning'; 'Region'},'fontsize',txt_font,'backgroundcolor','none','HorizontalAlignment','left');
 textm(mean(release_for.Latitude(5:8)),mean(release_for.Longitude(5:8)) + 1, {'Northern Spawning'; 'Region'},'fontsize',txt_font,'backgroundcolor','none','HorizontalAlignment','left');
 
-% setm(gca,'GColor',[0.8 0.8 0.8],'glinewidth',0.2)
-
-textm(-24.5,145.5,'\bfA)','fontsize',12)
+al = textm(-24.55,145.1,'\bfA)','fontsize',12);
 uistack(h.h, 'bottom')
 uistack(h.f, 'bottom')
 
@@ -66,8 +64,18 @@ s = struct('res', 'Month');
 count = 1;
 c_ax = [14 28]; 
 
-SST = sat_IMOS(modis_datenum, [y1 y2], [x1 x2], 'SST', s, count);
-SST.SST = squeeze(SST.SST);
+an1 = annotation('arrow',[0.7 0.74],[0.75 0.75], 'HeadStyle', 'cback1','Linewidth',1);
+tx1 = textm(-27, 150.5, 'EAC Core','HorizontalAlignment','center', 'VerticalAlignment','top', 'Rotation',90, 'fontsize', 9);
+an2 = annotation('arrow',[0.675 0.71],[0.55 0.55], 'HeadStyle', 'cback1','Linewidth',1);
+tx2 = textm(-33.5, 149, 'EAC Separation','HorizontalAlignment','center', 'VerticalAlignment','top', 'Rotation',90, 'fontsize', 9);
+
+if reprocess == 1
+    SST = sat_IMOS(modis_datenum, [y1 y2], [x1 x2], 'SST', s, count);
+    SST.SST = squeeze(SST.SST);
+    save Processed/SST_Data.mat SST
+else
+   load Processed/SST_Data.mat 
+end
 
 [c,h.hc] = contourm(SST.Lat(1:res:end),SST.Lon(1:res:end),SST.SST(1:res:end,1:res:end),c_ax(1):0.5:c_ax(2),'fill','on','edgecolor','none');
 caxis(c_ax);
@@ -76,7 +84,7 @@ colormap('jet')
 uistack(h.f, 'top')
 uistack(h.h, 'bottom')
 
-clbr = colorbar('Position',[0.63 0.47 0.017 0.35]);
+clbr = colorbar('Position',[0.63 0.46 0.017 0.35]);
 set(get(clbr,'Label'),'String','Sea Surface Temperature (^\circC)')
 
 in.datenum = modis_datenum;
@@ -89,8 +97,9 @@ in.res = 2;
 
 Alt = sat_plot_Altimetry(in);
 
-textm(-24.5,145.5,'\bfB)','fontsize',12)
+bl = textm(-24.55,145.1,'\bfB)','fontsize',12);
 uistack(h.f, 'bottom')
 uistack(h.hc, 'bottom')
+
 set(gcf,'color','w')
-export_fig Tailor_SiteMap -png -r400
+export_fig Tailor_SiteMap -eps -png -r400
